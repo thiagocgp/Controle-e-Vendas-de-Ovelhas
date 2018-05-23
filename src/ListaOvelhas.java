@@ -7,29 +7,34 @@ public class ListaOvelhas {
     private LinkedList<Ovelha> ovelhasVendidas;
 
     public ListaOvelhas(){
-        ovelhas = new LinkedList<Ovelha>();
+        this.ovelhas = new LinkedList<Ovelha>();
+        this.ovelhasVendidas = new LinkedList<Ovelha>();;
     }
 
     void addOvelha(Ovelha ovelha){
-        ovelhas.add(ovelha);
+        this.ovelhas.add(ovelha);
     }
 
     void removeOvelha(Ovelha ovelha) {
-        ovelhas.remove(ovelha);
+        this.ovelhas.remove(ovelha);
     }
 
     
     //lista todos os animais do rebanho
     public LinkedList<Ovelha> listaOvelhas(){
-        return ovelhas;
+        return this.ovelhas;
+    }
+    
+  //lista todos os animais vendidos
+    public LinkedList<Ovelha> listaOvelhasVendidas(){
+        return this.ovelhasVendidas;
     }
 
     //lista apenas os machos
     public LinkedList<MachoAdulto> listaMachos(){
-        Iterator<Ovelha> i = ovelhas.iterator();
+        Iterator<Ovelha> i = this.ovelhas.iterator();
         LinkedList<MachoAdulto> aux = new LinkedList<MachoAdulto>();
         Ovelha o;
-
         while (i.hasNext()) {
             o = (Ovelha) i.next();
             if(o instanceof MachoAdulto) {
@@ -42,10 +47,9 @@ public class ListaOvelhas {
 
     //lista de machos reprodutores
     public LinkedList<MachoAdulto> listaReprodutor(){
-        Iterator<Ovelha> i = ovelhas.iterator();
+        Iterator<Ovelha> i = this.ovelhas.iterator();
         LinkedList<MachoAdulto> aux = new LinkedList<MachoAdulto>();
         Ovelha o;
-
         while (i.hasNext()) {
             o = (Ovelha) i.next();
             if(o instanceof MachoAdulto && (((MachoAdulto) o).getCategoria() == CategoriaMacho.reprodutor)) {
@@ -58,10 +62,9 @@ public class ListaOvelhas {
 
     //lista de machos de corte
     public LinkedList<MachoAdulto> listaCorte(){
-        Iterator<Ovelha> i = ovelhas.iterator();
+        Iterator<Ovelha> i = this.ovelhas.iterator();
         LinkedList<MachoAdulto> aux = new LinkedList<MachoAdulto>();
         Ovelha o;
-
         while (i.hasNext()) {
             o = (Ovelha) i.next();
             if(o instanceof MachoAdulto && (((MachoAdulto) o).getCategoria() == CategoriaMacho.corte)) {
@@ -74,10 +77,9 @@ public class ListaOvelhas {
 
     //lista apenas de femeas
     public LinkedList<FemeaAdulta> listaFemeas(){
-        Iterator<Ovelha> i = ovelhas.iterator();
+        Iterator<Ovelha> i = this.ovelhas.iterator();
         LinkedList<FemeaAdulta> aux = new LinkedList<FemeaAdulta>();
         Ovelha o;
-
         while (i.hasNext()) {
             o = (Ovelha) i.next();
             if(o instanceof FemeaAdulta) {
@@ -90,10 +92,9 @@ public class ListaOvelhas {
 
     //lista apenas de borregos
     public LinkedList<Borrego> listaBorregos(){
-        Iterator<Ovelha> i = ovelhas.iterator();
+        Iterator<Ovelha> i = this.ovelhas.iterator();
         LinkedList<Borrego> aux = new LinkedList<Borrego>();
         Ovelha o;
-
         while (i.hasNext()) {
             o = (Ovelha) i.next();
             if(o instanceof Borrego) {
@@ -106,9 +107,8 @@ public class ListaOvelhas {
 
     //Retorna ovelha pelo ID
     public Ovelha buscaPorId(int id){
-        Iterator<Ovelha> i = ovelhas.iterator();
+        Iterator<Ovelha> i = this.ovelhas.iterator();
         Ovelha o;
-
         while (i.hasNext()) {
             o = (Ovelha) i.next();
             if(id == o.getIdOvelha()){
@@ -120,16 +120,35 @@ public class ListaOvelhas {
 
     //Passa uma ovelha para a lista de vendidos e retira da lista de ovelhas
     public void venderOvelha(int id) {
-        Iterator<Ovelha> i = ovelhas.iterator();
+        Iterator<Ovelha> i = this.ovelhas.iterator();
         Ovelha o;
-
         while (i.hasNext()) {
             o = (Ovelha) i.next();
             if(id == o.getIdOvelha()){
-                ovelhasVendidas.add(o);
+                this.ovelhasVendidas.add(o);
                 removeOvelha(o);
             }
         }
+    }
+    
+    //Checa se o id já existe
+    public boolean checaExisteId(int id) {
+    	Iterator<Ovelha> i = this.ovelhas.iterator();
+        Ovelha o;
+        while (i.hasNext()) {
+            o = (Ovelha) i.next();
+            if(id == o.getIdOvelha()){
+                return true;
+            }
+        }
+        i = this.ovelhasVendidas.iterator();
+        while (i.hasNext()) {
+            o = (Ovelha) i.next();
+            if(id == o.getIdOvelha()){
+                return true;
+            }
+        }
+        return false;
     }
     
 }

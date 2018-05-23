@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Venda {
@@ -34,5 +35,10 @@ public class Venda {
 
     public void setDataVenda(Date dataVenda) {
         this.dataVenda = dataVenda;
+    }
+    
+    public String mostraDados(){
+    	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return ("ID Ovelha: " + getId() + " \nPreço vendido: " + getPreco() + " \nData da Venda: " + sdf.format(getDataVenda()) + "\n");
     }
 }

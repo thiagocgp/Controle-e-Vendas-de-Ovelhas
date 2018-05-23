@@ -1,15 +1,16 @@
+import java.util.Date;
 import java.util.LinkedList;
 
 public class Comprador {
 
     private int idComprador;
     private String nome;
-    LinkedList<Venda> ovelhasCompradas;
+    private LinkedList<Venda> ovelhasCompradas;
 
-    public Comprador(int idComprador, String nome, LinkedList<Venda> ovelhasCompradas) {
+    public Comprador(int idComprador, String nome) {
         this.idComprador = idComprador;
         this.nome = nome;
-        this.ovelhasCompradas = ovelhasCompradas;
+        this.ovelhasCompradas = new LinkedList<Venda>();
     }
 
     public int getIdComprador() {
@@ -28,11 +29,12 @@ public class Comprador {
         this.nome = nome;
     }
 
-    public void addVenda(Venda venda){
-        ovelhasCompradas.add(venda);
-    }
-
     public LinkedList<Venda> listaCompras(){
-        return ovelhasCompradas;
+        return this.ovelhasCompradas;
+    }
+    
+    public void addVenda(int idOvelha, double preco, Date dataVenda) {
+    	Venda venda = new Venda(idOvelha, preco, dataVenda);
+    	this.ovelhasCompradas.add(venda);
     }
 }
