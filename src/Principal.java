@@ -375,6 +375,10 @@ public class Principal {
 				}
 				int intIdFemea = Integer.parseInt(idFemea);
 				Ovelha ovelhaFemea = ovelhas.buscaPorId(intIdFemea);
+				if(ovelhaFemea == null) {
+					JOptionPane.showMessageDialog(null, "Ovelha não encontrada.");
+					return;
+				}
 				if(ovelhaFemea.getSexo() != Sexo.femea || ovelhaFemea instanceof Borrego) {
 					JOptionPane.showMessageDialog(null, "ID não corresponde a uma fêmea");
 					return;
